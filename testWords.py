@@ -1,19 +1,24 @@
 import os
 import csv
 
-os.system("python3 countWords.py numbertest.txt")
+from optparse import OptionParser
+parser=OptionParser()
+opts, args = parser.parse_args()
 
-print("Counts in test file:")
-print("zero: 2")
-print("one: 13")
-print("two: 3")
-print("three: 3")
-print("four: 2")
-print("five: 2")
-print("six: 2")
-print("seven: 2")
-print("eight: 2")
-print("nine: 2")
+textIn = str(args[0])
+expectedCountsIn = str(args[1])
+
+os.system("python3 countWords.py "+textIn)
+
+print("Expected counts in test file:")
+fileRefCSV = open(expectedCountsIn, 'r')
+readerRef=csv.reader(fileRefCSV, delimiter=",")
+for row in readerRef:
+    if ("Word" in row[0]) or ("word" in row[0]):
+        continue
+    else:
+        print("%s: %s"%(row[0], row[1]))
+
 
 print("\n\nFound counts:")
 fileCSV = open("wordCounts.csv", 'r')
