@@ -19,6 +19,7 @@ for row in readerRef:
     else:
         print("%s: %s"%(row[0], row[1]))
 
+fileRefCSV.close()
 
 print("\n\nFound counts:")
 fileCSV = open("wordCounts.csv", 'r')
